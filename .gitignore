@@ -11,3 +11,5 @@ mlflow.db
 reports/
 
 *.log
+models/sarima_model.pkl
+
