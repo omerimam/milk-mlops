@@ -1,0 +1,12 @@
+services:
+  milk-api:
+    image: milk-forecast-api:1.0
+    container_name: milk-api-container
+
+    ports:
+      - "8001:8000"
+
+    environment:
+      MODEL_URI: /app/models/champion_model
+
+    restart: unless-stopped

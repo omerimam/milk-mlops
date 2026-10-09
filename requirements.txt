@@ -1,0 +1,11 @@
+mlflow
+pandas 
+matplotlib 
+joblib
+statsmodels
+scikit-learn
+numpy
+evidently
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+prometheus-client

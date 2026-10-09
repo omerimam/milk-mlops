@@ -1,0 +1,17 @@
+Train SARIMA
+     ↓
+MLflow Experiment
+     ↓
+Compare Runs
+     ↓
+Best Model
+     ↓
+Model Registry
+     ↓
+MilkSARIMA Version 1
+     ↓
+Alias = champion
+     ↓
+load_model("models:/MilkSARIMA@champion")
+     ↓
+Forecast ✅
