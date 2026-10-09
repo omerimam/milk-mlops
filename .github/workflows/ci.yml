@@ -1,4 +1,4 @@
-name: Milk MLOps CI
+name: Milk MLOps CI/CD
 
 on:
   push:
@@ -7,6 +7,10 @@ on:
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   build-and-test:
@@ -32,3 +36,29 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t milk-forecast-api:ci .
+
+  publish-image:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/omerimam/milk-forecast-api:latest
+            ghcr.io/omerimam/milk-forecast-api:${{ github.sha }}
