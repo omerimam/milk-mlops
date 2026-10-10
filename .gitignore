@@ -18,3 +18,5 @@ monitoring-data/current.csv
 
 # Local backup
 monitoring/evidently_monitor_backup.py
+
+Milk_MLOps_Docker_CICD_Reference_AR.pdf
