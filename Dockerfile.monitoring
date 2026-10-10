@@ -1,0 +1,13 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements-monitoring.txt .
+
+RUN pip install --no-cache-dir -r requirements-monitoring.txt
+
+COPY monitoring/evidently_monitor.py /app/monitoring/evidently_monitor.py
+
+RUN mkdir -p /app/monitoring-data /app/reports
+
+CMD ["python", "monitoring/evidently_monitor.py"]
