@@ -13,3 +13,8 @@ reports/
 *.log
 models/sarima_model.pkl
 
+# Evidently runtime monitoring data
+monitoring-data/current.csv
+
+# Local backup
+monitoring/evidently_monitor_backup.py
