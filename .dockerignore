@@ -8,8 +8,9 @@ __pycache__/
 
 data/
 reports/
-monitoring/
 src/
+
+monitoring-data/
 
 mlruns/
 mlflow.db
