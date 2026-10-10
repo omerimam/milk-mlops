@@ -34,8 +34,12 @@ jobs:
       - name: Test FastAPI import
         run: python -c "from app.main import app; print('FastAPI import successful')"
 
-      - name: Build Docker image
+      - name: Build FastAPI Docker image
         run: docker build -t milk-forecast-api:ci .
+
+      - name: Build Evidently Docker image
+        run: docker build -f Dockerfile.monitoring -t milk-evidently:ci .
+
 
   publish-image:
     needs: build-and-test
@@ -54,7 +58,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push FastAPI image
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -62,3 +66,13 @@ jobs:
           tags: |
             ghcr.io/omerimam/milk-forecast-api:latest
             ghcr.io/omerimam/milk-forecast-api:${{ github.sha }}
+
+      - name: Build and push Evidently image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.monitoring
+          push: true
+          tags: |
+            ghcr.io/omerimam/milk-evidently:latest
+            ghcr.io/omerimam/milk-evidently:${{ github.sha }}
